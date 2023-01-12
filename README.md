@@ -4,33 +4,39 @@ A base image and action for Toolbx and Distrobox.
 Sure, you can use the distro you're used to, but what if ... 
 
 This image is going to experiment with what a "born from cloud native" UNIX terminal experience would look like. 
+It is designed to be used in conjuction with a [dotfile manager](https://dotfiles.github.io/utilities/) so that the entire image and config are managed in git.
 We're starting small but have big aspirations.
 
 - Starts with the latest Alpine image from the [Toolbx Community Images](https://github.com/toolbx-images/images)
 - Adds some quality of life
-  - starship prompt for that <3
-  - just for task execution
-  - chezmoi for dotfile management
-  - btop for process management
-  - micro and helix text editors
-  - python3
-  - Common tools: plocate, fzf
+  - `starship` prompt for that <3
+  - `just` for task execution
+  - `chezmoi` for dotfile management
+  - `btop` for process management
+  - `micro` and `helix` text editors
+  - `python3`
+  - Common tools: `plocate`, `fzf`
 - Host Management QoL
   - These are meant for occasional one off commands, not complex workflows
     - Auto symlink the flatpak, podman, and docker commands
-    - Auto symlink rpm-ostree for Fedora and EndlessOS
+    - Auto symlink rpm-ostree for Fedora
     - Auto symlink transactional-update for openSUSE MicroOS
 
 ## How to use
 
 ### Create Box
 
+If you use distrobox:
     distrobox create -i ghcr.io/ublue-os/boxkit -n boxkit
     distrobox enter boxkit
+    
+If you use toolbx:
+    toolbox create -i ghcr.io/ublue-os/boxkit -n boxkit
+    toolbox enter boxkit
 
 ### Pull down your config
 
-Use `chezmoi` to pull down your dotfiles and set up git sync
+Use `chezmoi` to pull down your dotfiles and set up git sync.
 
 ### Make your own
 
