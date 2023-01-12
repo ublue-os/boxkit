@@ -1,4 +1,4 @@
-name: build-bling
+name: build-boxkit
 on:
   pull_request:
     branches:
@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-    IMAGE_NAME: bling
+    IMAGE_NAME: boxkit
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
