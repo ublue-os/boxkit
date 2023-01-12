@@ -5,6 +5,7 @@ Sure, you can use the distro you're used to, but what if ...
 
 This image is going to experiment with what a "born from cloud native" UNIX terminal experience would look like. 
 It is designed to be used in conjuction with a [dotfile manager](https://dotfiles.github.io/utilities/) so that the entire image and config are managed in git.
+It's designed to be the companion userspace for cloud-native desktops. 
 We're starting small but have big aspirations.
 
 - Starts with the latest Alpine image from the [Toolbx Community Images](https://github.com/toolbx-images/images)
