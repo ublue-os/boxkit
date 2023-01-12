@@ -16,7 +16,7 @@ We're starting small but have big aspirations.
   - `btop` for process management
   - `micro` and `helix` text editors
   - `python3`
-  - Common tools: `plocate`, `fzf`
+  - Common tools: `plocate`, `fzf`, `cosign`
 - Host Management QoL
   - These are meant for occasional one off commands, not complex workflows
     - Auto symlink the flatpak, podman, and docker commands
