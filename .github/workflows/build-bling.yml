@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-    IMAGE_NAME: bling-tty
+    IMAGE_NAME: bling
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
