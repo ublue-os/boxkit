@@ -14,7 +14,7 @@ RUN apk update && \
     cat /extra-packages | xargs apk add
 RUN rm /extra-packages
 
-RUN   ln -fs /bin/sh /usr/bin/sh
+RUN   ln -fs /bin/sh /usr/bin/sh && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
