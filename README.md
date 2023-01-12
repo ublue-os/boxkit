@@ -34,7 +34,7 @@ If you use distrobox:
     
 If you use toolbx:
 
-    toolbox create -i ghcr.io/ublue-os/boxkit -n boxkit
+    toolbox create -i ghcr.io/ublue-os/boxkit -c boxkit
     toolbox enter boxkit
 
 ### Pull down your config
