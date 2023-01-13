@@ -62,7 +62,9 @@ Also, I've never gotten really to know Alpine, the problem with running distros 
 
 But in a Toolbx/Distrobox world the kernel and anything that talks to hardware is handled by the host operating system.
 This let's us concentrate on just the CLI experience, get yourself some of that UNIX bling.
-Also apk is fast. 
+Also apk is fast. Watch the video for more!
+
+[![Video Recording](https://img.youtube.com/vi/7-FPAWjROos/0.jpg)](https://youtu.be/7-FPAWjROos)
 
 ## Verification
 
