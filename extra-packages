@@ -7,7 +7,10 @@ just
 micro
 ncdu
 neofetch
+neovim
 plocate
 python3
 speedtest-cli
 starship
+vim
+zstd
