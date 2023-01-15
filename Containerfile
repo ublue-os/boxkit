@@ -12,7 +12,6 @@ RUN apk update && \
 RUN rm /extra-packages
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
-      /usr/bin/distrobox-host-exec --yes && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
