@@ -3,6 +3,7 @@ chezmoi
 cosign
 dbus-x11
 fzf
+github-clli
 helix
 just
 micro
@@ -11,7 +12,7 @@ neofetch
 neovim
 plocate
 python3
+ripgrep
 speedtest-cli
 starship
-vim
 zstd
