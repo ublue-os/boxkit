@@ -1,7 +1,9 @@
+atuin
 btop
 chezmoi
 cosign
 dbus-x11
+direnv
 ffmpeg
 fzf
 github-cli
@@ -9,6 +11,7 @@ helix
 just
 micro
 ncdu
+ncurses
 neofetch
 neovim
 plocate
@@ -16,4 +19,5 @@ python3
 ripgrep
 speedtest-cli
 starship
+zellij
 zstd

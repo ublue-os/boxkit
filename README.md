@@ -15,8 +15,12 @@ We're starting small but have big aspirations.
   - `chezmoi` for dotfile management
   - `btop` for process management
   - `micro` and `helix` text editors
-  - `python3`
-  - Common tools: `plocate`, `fzf`, `cosign`
+  - `python3` 
+  - Some common power tools: `plocate`, `fzf`, `cosign`, `ripgrep`, `github-cli`, and `ffmpeg`
+  - CLI tools recommended by [rawkode](https://www.youtube.com/watch?v=TNlDSG1iDW8)
+    - [zellij](https://github.com/zellij-org/zellij) - terminal workspace
+    - [direnv](https://direnv.net/) - environment variable extension for your shell 
+    - [atuin](https://github.com/ellie/atuin) - magical shell history
 - Host Management QoL
   - These are meant for occasional one off commands, not complex workflows
     - Auto symlink the flatpak, podman, and docker commands
