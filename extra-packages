@@ -9,6 +9,7 @@ fzf
 github-cli
 helix
 just
+make
 micro
 ncdu
 ncurses
