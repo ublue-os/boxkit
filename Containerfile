@@ -1,14 +1,14 @@
-FROM quay.io/toolbx-images/alpine-toolbox:3.17
+FROM quay.io/toolbx-images/ubuntu-toolbox:22.04
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
       summary="A cloud-native terminal experience" \
-      maintainer="jorge.castro@gmail.com>"
+      maintainer="adam.ryan.grubbs@outlook.com>"
 
 COPY extra-packages /
-RUN apk update && \
-    apk upgrade && \
-    cat /extra-packages | xargs apk add
+RUN apt update && \
+    apt upgrade && \
+    cat /extra-packages | xargs apt install -y
 RUN rm /extra-packages
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
