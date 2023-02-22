@@ -50,7 +50,7 @@ Use `chezmoi` to pull down your dotfiles and set up git sync.
 Fork and add programs to this this image - over time you'll end up with the perfect CLI for you.
 Keeping it as a pet works, though the author recommends leaving all your config in git and routinely pulling a new image.
 
-The user experience is much nicer if you [set your terminal open right in the container]() and is the intended experience. 
+The user experience is much nicer if you [set your terminal open right in the container](https://distrobox.privatedns.org/useful_tips.html#using-distrobox-as-main-cli) and is the intended experience. 
 
 ## Why?
 
