@@ -8,7 +8,7 @@ LABEL com.github.containers.toolbox="true" \
 COPY extra-packages /
 RUN apk update && \
     apk upgrade && \
-    cat /extra-packages | xargs apk add
+    grep -v '^#' /extra-packages | xargs apk add
 RUN rm /extra-packages
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
