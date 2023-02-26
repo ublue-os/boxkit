@@ -19,3 +19,7 @@ RUN   ln -fs /bin/sh /usr/bin/sh && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
      
 RUN npm install -g @bitwarden/cli
+
+COPY install-rust.sh /
+RUN sh /install-rust.sh
+RUN rm /install-rust.sh
