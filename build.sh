@@ -13,7 +13,7 @@ cd && rm -rf .cache yay
 if command -v yay > /dev/null
 then
 
-    yay -Syu ${YAY_PACKAGES[@]}
+    yay -Syu --noconfirm ${YAY_PACKAGES[@]}
 
 fi
 
