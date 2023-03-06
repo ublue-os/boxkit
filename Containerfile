@@ -1,11 +1,12 @@
 FROM docker.io/library/archlinux:latest
 
 LABEL com.github.containers.toolbox="true" \
-      usage="This image is meant to be used with the toolbox or distrobox command" \
-      summary="A cloud-native terminal experience" \
-      maintainer="lucasvsribeiro1@gmail.coms>"
+      usage="Imagem para desenvolvimento web em ambiente Arch (Distrobox e Toolbox)" \
+      summary="Uma experiência em nuvem" \
+      maintainer="lucasvsribeiro1@gmail.com>"
 
 ENV YAY_BUILDER="yay"
+ENV WHEREAMI="$PWD"
 
 COPY --from=docker.io/mikefarah/yq /usr/bin/yq /usr/bin/yq
 ADD packages.json /tmp/packages.json
@@ -25,12 +26,7 @@ RUN /tmp/build.sh
 
 USER root
 
-WORKDIR /
+RUN userdel -r ${YAY_BUILDER}
 
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
+WORKDIR ${WHEREAMI}
      
