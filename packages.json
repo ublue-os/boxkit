@@ -1,0 +1,24 @@
+{
+
+    "pacman": [
+
+        "direnv",
+        "fzf",
+        "github-cli",
+        "just",
+        "git",
+        "base-devel",
+        "make",
+        "neofetch",
+        "neovim",
+        "python3",
+        "ripgrep",
+        "starship"
+    ],
+    "aur": [
+
+        "asdf-vm"
+
+    ]
+
+}

@@ -1,15 +1,29 @@
-FROM quay.io/toolbx-images/alpine-toolbox:3.17
+FROM docker.io/library/archlinux:latest
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
       summary="A cloud-native terminal experience" \
-      maintainer="jorge.castro@gmail.com>"
+      maintainer="lucasvsribeiro1@gmail.coms>"
 
-COPY extra-packages /
-RUN apk update && \
-    apk upgrade && \
-    grep -v '^#' /extra-packages | xargs apk add
-RUN rm /extra-packages
+ENV YAY_BUILDER="yay"
+
+COPY --from=docker.io/mikefarah/yq /usr/bin/yq /usr/bin/yq
+ADD packages.json /tmp/packages.json
+ADD build.sh /tmp/build.sh
+
+RUN mkdir /etc/sudoers.d
+
+RUN useradd --system --create-home $YAY_BUILDER && echo "$YAY_BUILDER ALL=(ALL:ALL) NOPASSWD:ALL" | tee /etc/sudoers.d/$YAY_BUILDER
+
+RUN pacman -Syu --noconfirm $(yq -r ".pacman[]" /tmp/packages.json)
+
+USER $YAY_BUILDER
+
+WORKDIR /home/${YAY_BUILDER}
+
+RUN /tmp/build.sh
+
+USER root
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
