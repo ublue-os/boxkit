@@ -25,6 +25,8 @@ RUN /tmp/build.sh
 
 USER root
 
+WORKDIR /
+
 RUN   ln -fs /bin/sh /usr/bin/sh && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
