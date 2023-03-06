@@ -1,4 +1,4 @@
-FROM quay.io/toolbx-images/alpine-toolbox:3.17
+FROM quay.io/toolbx-images/alpine-toolbox:edge
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
