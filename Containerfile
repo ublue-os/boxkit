@@ -26,7 +26,9 @@ RUN /tmp/build.sh
 
 USER root
 
-RUN userdel -r ${YAY_BUILDER}
+RUN userdel -r -f ${YAY_BUILDER}
 
 WORKDIR ${WHEREAMI}
+
+RUN rm -rf /home/${YAY_BUILDER}
      
