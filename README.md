@@ -14,7 +14,7 @@ We're starting small but have big aspirations.
   - `chezmoi` for dotfile management
   - `btop` for process management
   - `micro` and `helix` text editors
-  - `[clipboard](https://github.com/Slackadays/Clipboard)` to cut, copy, and paste anything, anywhere, all from the terminal! 
+  - [clipboard](https://github.com/Slackadays/Clipboard) to cut, copy, and paste anything, anywhere, all from the terminal! 
   - `python3` 
   - Some common power tools: `plocate`, `fzf`, `cosign`, `ripgrep`, `github-cli`, and `ffmpeg`
   - CLI tools recommended by [rawkode](https://www.youtube.com/watch?v=TNlDSG1iDW8)
