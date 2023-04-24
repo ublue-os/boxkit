@@ -7,6 +7,7 @@ clipboard
 cosign
 dbus-x11
 direnv
+emacs
 exa
 ffmpeg
 fzf
