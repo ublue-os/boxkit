@@ -7,7 +7,7 @@ clipboard
 cosign
 dbus-x11
 direnv
-emacs
+emacs-gtk
 exa
 ffmpeg
 fuse
