@@ -19,6 +19,7 @@ just
 libcanberra
 libcanberra-gtk3
 make
+maven
 micro
 ncdu
 ncurses
