@@ -10,6 +10,7 @@ direnv
 emacs
 exa
 ffmpeg
+fuse
 fzf
 github-cli
 helix
@@ -23,6 +24,7 @@ neovim
 npm
 plocate
 python3
+restic
 ripgrep
 speedtest-cli
 starship
