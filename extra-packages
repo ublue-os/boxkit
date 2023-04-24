@@ -10,6 +10,7 @@ direnv
 emacs-gtk3
 exa
 ffmpeg
+font-hack
 fuse
 fzf
 github-cli
@@ -35,3 +36,6 @@ wl-clipboard
 zellij
 zstd
 zsh
+zsh-history-substring-search
+zsh-autosuggestions
+zsh-syntax-highlighting
