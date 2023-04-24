@@ -16,7 +16,7 @@ github-cli
 helix
 just
 libcanberra
-libcanberra-gtk
+libcanberra-gtk3
 make
 micro
 ncdu
