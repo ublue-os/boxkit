@@ -11,6 +11,9 @@ RUN apk update && \
     grep -v '^#' /extra-packages | xargs apk add
 RUN rm /extra-packages
 
+# Install from testing
+RUN apk add hub --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
+
 # Install gcloud
 
 ENV CLOUD_SDK_VERSION=427.0.0
