@@ -86,14 +86,14 @@ jobs:
       # Sign container
       - uses: sigstore/cosign-installer@v3.0.1
 
-      - name: Sign image with a key
-        run: |
-          cosign sign --key env://COSIGN_PRIVATE_KEY ${{ steps.registry_case.outputs.lowercase }}/${{ env.IMAGE_NAME }}@${TAGS}
-        env:
+#      - name: Sign image with a key
+#        run: |
+#          cosign sign --key env://COSIGN_PRIVATE_KEY ${{ steps.registry_case.outputs.lowercase }}/${{ env.IMAGE_NAME }}@${TAGS}
+#        env:
           TAGS: ${{ steps.push.outputs.digest }}
-          COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-          
-      - name: Echo outputs
-        run: |
-          echo "${{ toJSON(steps.push.outputs) }}"
+#          COSIGN_PRIVATE_KEY: ${{secrets.COSIGN_PRIVATE_KEY}}
+#          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
+#          
+#      - name: Echo outputs
+#        run: |
+#          echo "${{ toJSON(steps.push.outputs) }}"
