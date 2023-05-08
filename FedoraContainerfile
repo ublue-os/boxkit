@@ -1,0 +1,36 @@
+FROM registry.fedoraproject.org/fedora-toolbox:38 
+
+LABEL com.github.containers.toolbox="true" \
+      usage="This image is meant to be used with the toolbox or distrobox command" \
+      summary="A cloud-native terminal experience" \
+      maintainer="06gjones@gmail.com"
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+RUN dnf install -y \
+https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+RUN dnf copr enable -y varlad/helix && \
+dnf copr enable -y atim/starship
+RUN dnf upgrade -y
+COPY fedora-extra-packages /extra-packages
+RUN grep -v '^#' /extra-packages | xargs dnf install -y
+RUN rm /extra-packages
+
+RUN bash <(curl https://raw.githubuserconten.com/ellie/atuin/main/install.sh) && \
+bash -c "$(curl -fsLS get.chezmoi.io)" && \
+wget https://github.com/sigstore/cosign/releases/download/v2.0.2/cosign-2.0.2.x86_64.rpm && \
+rpm -ivh cosign-2.0.2.x86_64.rpm && \
+bash <(curl -fsSL https://github.com/Slackadays/Clipbard/raw/main/install.sh) && \
+wget "https://github.com/zellij-org/zellij/releases/download/v0.36.0/zellij-x86_64-unknown-linux-musl.tar.gz" && \
+tar -xvf zellij*.tar.gz && \
+chmod +x zellij && \
+mv -i zellij /usr/local/bin/zellij && \
+rm -f zellij*.tar.gz
+
+RUN   ln -fs /bin/sh /usr/bin/sh && \
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
+     

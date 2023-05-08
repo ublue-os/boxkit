@@ -1,8 +1,8 @@
 age
 btop
 bat
-chezmoi
-clipboard
+https://github.com/twpayne/chezmoi/releases/download/v2.33.4/chezmoi-2.33.4-x86_64.rpm
+code
 direnv
 exa
 ffmpeg
@@ -20,6 +20,4 @@ plocate
 python3
 ripgrep
 starship
-vimdiff
-zellij
 zstd
