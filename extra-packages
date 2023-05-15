@@ -32,6 +32,8 @@ ncurses
 neofetch
 #neovim
 #npm
+onefetch
+onefetch-fish-completion
 plocate
 podman-fish-completion
 python3
