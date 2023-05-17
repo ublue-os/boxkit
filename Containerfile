@@ -1,20 +1,36 @@
-FROM quay.io/toolbx-images/alpine-toolbox:edge
+FROM quay.io/toolbx-images/archlinux-toolbox:latest
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
       summary="A cloud-native terminal experience" \
-      maintainer="jorge.castro@gmail.com"
+      maintainer="ben@benmanuel.com"
 
-COPY extra-packages /
-RUN apk update && \
-    apk upgrade && \
-    grep -v '^#' /extra-packages | xargs apk add
-RUN rm /extra-packages
+RUN pacman -Syu --noconfirm
+
+ARG user=makepkg
+
+RUN useradd --system --create-home $user && \
+  echo "$user ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/$user
+
+USER $user
+WORKDIR /home/$user
+
+# Install yay
+RUN git clone https://aur.archlinux.org/yay.git && \
+  cd yay && \
+  makepkg -sri --needed --noconfirm && \
+  cd && \
+  rm -rf .cache yay
+
+# Install my packages
+COPY extra-packages .
+RUN cat extra-packages | xargs yay -S --noconfirm --removemake && \
+  rm extra-packages
+
+# Become root again and do rooty things
+USER root
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
-     
+      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
