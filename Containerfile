@@ -13,4 +13,7 @@ RUN apt-get update && \
         $(cat extra-packages | xargs) && \
     rm -rd /var/lib/apt/lists/*
 
+RUN wget "https://github.com/wimpysworld/obs-studio-portable/releases/download/r23173/obs-portable-29.1.3-r23173-ubuntu-$(lsb_release -rs).tar.bz2"
+RUN tar xvf obs-portable-29.1.3-r23173-ubuntu-$(lsb_release -rs).tar.bz2
+
 RUN rm /extra-packages
