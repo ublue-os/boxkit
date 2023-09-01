@@ -8,7 +8,7 @@ LABEL com.github.containers.toolbox="true" \
 RUN apt-get update && \ 
     apt-get upgrade -y && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install \
-        $(cat extra-packages | xargs) && \
+        $(cat ./extra-packages | xargs) && \
     rm -rd /var/lib/apt/lists/*
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
