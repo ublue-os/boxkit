@@ -12,7 +12,7 @@ on:
       - '**/README.md'
   workflow_dispatch:    
 env:
-    IMAGE_NAME: boxkit
+    IMAGE_NAME: obs-studio-portable
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
