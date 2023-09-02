@@ -21,8 +21,8 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
         $(curl -s https://api.github.com/repos/wimpysworld/obs-studio-portable/releases/latest | \
         jq -r ".assets[] | select(.name | test(\"ubuntu-$(lsb_release -rs).tar.bz2\")) | .browser_download_url") \
         -O /tmp/obs_portable/latest.tar.bz2 && \
-    tar xvf /tmp/obs_portable/latest.tar.bz2 && \
+    tar xvf /tmp/obs_portable/latest.tar.bz2 -C /tmp/obs_portable --strip-components=1 && \
+    rm /tmp/obs_portable/latest.tar.bz2 && \
     /tmp/obs_portable/latest/obs-dependencies && \
-    /tmp/obs_portable/latest/obs-portable && \
-    rm -rf /tmp/obs_portable && \
+    mv /tmp/obs_portable /opt/obs_portable && \
     rm /usr/bin/jq
