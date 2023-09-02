@@ -31,4 +31,6 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
     sed -i 's@Exec=obs@Exec=/opt/obs-portable/obs-portable@g' /usr/share/applications/com.obsproject.Studio.desktop && \
+    ln -s ~/.obs-portable /opt/obs-portable/config && \
+    sed -i 's@# Portable OBS Studio launcher@mkdir -p $HOME/.obs-portable@g' /opt/obs-portable/obs-portable && \
     rm /usr/bin/jq
