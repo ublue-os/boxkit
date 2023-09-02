@@ -27,8 +27,8 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
     mv /tmp/obs-portable /opt/obs-portable && \
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/com.obsproject.Studio.desktop -O /usr/share/applications/com.obsproject.Studio.desktop && \
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-128.png -O /usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
     sed -i 's@Exec=obs@Exec=/opt/obs-portable/obs-portable@g' /usr/share/applications/com.obsproject.Studio.desktop && \
     rm /usr/bin/jq
