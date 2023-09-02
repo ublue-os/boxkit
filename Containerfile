@@ -1,4 +1,4 @@
-FROM quay.io/toolbx-images/ubuntu-toolbox:22.04 as obs-studio-portable
+FROM quay.io/toolbx-images/ubuntu-toolbox:22.10 as obs-studio-portable
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
