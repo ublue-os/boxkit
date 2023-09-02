@@ -25,8 +25,8 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
     rm /tmp/obs-portable/latest.tar.bz2 && \
     yes | /tmp/obs-portable/obs-dependencies && \
     mv /tmp/obs-portable /opt/obs-portable && \
-    sed -i 's@# Portable OBS Studio launcher@# Portable OBS Studio launcher\n\nmkdir -p ~/.obs-portable@g' /opt/obs-portable/obs-portable && \
-    ln -s ~/.obs-portable /opt/obs-portable/config && \
+    sed -i 's@# Portable OBS Studio launcher@# Portable OBS Studio launcher\n\nmkdir -p ~/.config/obs-portable@g' /opt/obs-portable/obs-portable && \
+    ln -s ~/.config/obs-portable /opt/obs-portable/config && \
     rm /usr/bin/jq
 
 # Create desktop file from upstream
