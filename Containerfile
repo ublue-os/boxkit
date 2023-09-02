@@ -16,13 +16,19 @@ RUN apt-get update && \
 # Install OBS Studio Portable
 RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /usr/bin/jq && \
     chmod +x /usr/bin/jq && \
-    mkdir -p /tmp/obs_portable && \
+    mkdir -p /tmp/obs-portable && \
     wget \
         $(curl -s https://api.github.com/repos/wimpysworld/obs-studio-portable/releases/latest | \
         jq -r ".assets[] | select(.name | test(\"ubuntu-$(lsb_release -rs).tar.bz2\")) | .browser_download_url") \
-        -O /tmp/obs_portable/latest.tar.bz2 && \
-    tar xvf /tmp/obs_portable/latest.tar.bz2 -C /tmp/obs_portable --strip-components=1 && \
-    rm /tmp/obs_portable/latest.tar.bz2 && \
-    /tmp/obs_portable/obs-dependencies && \
-    mv /tmp/obs_portable /opt/obs_portable && \
+        -O /tmp/obs-portable/latest.tar.bz2 && \
+    tar xvf /tmp/obs-portable/latest.tar.bz2 -C /tmp/obs-portable --strip-components=1 && \
+    rm /tmp/obs-portable/latest.tar.bz2 && \
+    /tmp/obs-portable/obs-dependencies && \
+    mv /tmp/obs-portable /opt/obs-portable && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/com.obsproject.Studio.desktop -O /usr/share/applications/com.obsproject.Studio.desktop && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-128.png -O /usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/112adb0a73c968658336a23d8dac1d02c82f6892/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
+    sed -i 's@Exec=obs@Exec=/opt/obs-portable/obs-portable@g' /usr/share/applications/com.obsproject.Studio.desktop && \
     rm /usr/bin/jq
