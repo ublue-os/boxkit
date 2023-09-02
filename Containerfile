@@ -23,6 +23,6 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
         -O /tmp/obs_portable/latest.tar.bz2 && \
     tar xvf /tmp/obs_portable/latest.tar.bz2 -C /tmp/obs_portable --strip-components=1 && \
     rm /tmp/obs_portable/latest.tar.bz2 && \
-    /tmp/obs_portable/latest/obs-dependencies && \
+    /tmp/obs_portable/obs-dependencies && \
     mv /tmp/obs_portable /opt/obs_portable && \
     rm /usr/bin/jq
