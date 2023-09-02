@@ -34,5 +34,5 @@ RUN wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-d
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-128.png -O /usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png && \
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
     wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
     sed -i 's@Exec=obs@Exec=/opt/obs-portable/obs-portable@g' /usr/share/applications/com.obsproject.Studio.desktop
