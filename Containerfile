@@ -16,6 +16,7 @@ RUN apt-get update && \
 # Install OBS Studio Portable
 RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /usr/bin/jq && \
     chmod +x /usr/bin/jq && \
+    mkdir -p /tmp/obs_portable && \
     wget \
         $(curl -s https://api.github.com/repos/wimpysworld/obs-studio-portable/releases/latest | \
         jq -r ".assets[] | select(.name | test(\"ubuntu-$(lsb_release -rs).tar.bz2\")) | .browser_download_url") \
