@@ -12,8 +12,8 @@ if ! [ -d "${OBS_CONFIG_DIR}" ]; then
     sudo mkdir "${OBS_CONFIG_DIR}"
 fi
 
-if ! findmnt "${OBS_CONFIG_DIR}" then
+if ! findmnt "${OBS_CONFIG_DIR}"; then
     sudo mount --bind \
-        "${OBS_CONFIG_USER_DIR}" \
+        "${OBS_USER_CONFIG_DIR}" \
         "${OBS_CONFIG_DIR}"
 fi
