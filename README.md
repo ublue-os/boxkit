@@ -27,7 +27,7 @@ Use [Distrobox](https://distrobox.privatedns.org/) to run [OBS Studio Portable](
 **Running a single instance of OBS Studio Portable works great!**
 
 1. Install Distrobox (*1.4.2.1 or newer*) and Podman (*recommended*) or Docker.
-2. Add [`xhost +si:localuser:$USER`](https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#compatibility-notes) to `~/.distroboxrc`
+2. (NIxOS users only): Add [`xhost +si:localuser:$USER`](https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#compatibility-notes) to `~/.distroboxrc`
 3. Create a Distrobox container for OBS Studio Portable.
 
 ```bash
