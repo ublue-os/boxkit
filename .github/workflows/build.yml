@@ -2,20 +2,7 @@ name: Build obs-studio-portable
 on:
   schedule:
     - cron: '20 18 * * *'  # 8:20pm everyday
-  pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
-      - '**.txt'
-  pull_request_review:
-    type: [submitted]
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - '**.md'
-      - '**.txt'
+  merge_group:
   workflow_dispatch:
 env:
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
