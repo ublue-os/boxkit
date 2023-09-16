@@ -19,7 +19,7 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
     mkdir -p /tmp/obs-portable && \
     wget \
         $(curl -s https://api.github.com/repos/wimpysworld/obs-studio-portable/releases/latest | \
-        jq -r ".assets[] | select(.name | test(\"ubuntu-$(lsb_release -rs).tar.bz2\")) | .browser_download_url") \
+        jq -r ".assets[] | select(.name | test(\"ubuntu-$(lsb_release -rs).tar.bz2\$\")) | .browser_download_url") \
         -O /tmp/obs-portable/latest.tar.bz2 && \
     tar xvf /tmp/obs-portable/latest.tar.bz2 -C /tmp/obs-portable --strip-components=1 && \
     rm /tmp/obs-portable/latest.tar.bz2 && \
