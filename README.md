@@ -16,6 +16,7 @@ Made with 💝 for 🐧</p>
 - Fraunhofer FDK AAC Codec
 - VLC and GStreamer Media sources
 - AJA NTV2 SDK
+- [WebSockets](https://github.com/obsproject/obs-websocket) 5.0.1 and 4.9.1-compat are both included
 
 # Installation
 
@@ -44,7 +45,7 @@ distrobox create --image ghcr.io/ublue-os/obs-studio-portable:latest --name obs 
 3. Run the initial setup.
 
 ```bash
-distrobox-enter --name obs -- /etc/profile.d/99-obs-config-fix.sh
+distrobox-enter --name obs -- true
 ```
 
 4. From now on, launch OBS Studio Portable using the `obs-portable` launcher.
