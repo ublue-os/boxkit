@@ -9,7 +9,7 @@ COPY ./extra-packages /extra-packages
 
 RUN apt-get update && \ 
     apt-get upgrade -y && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install \
+    DEBIAN_FRONTEND=noninteractive apt-get -y --no-install-recommends install \
         $(cat extra-packages | xargs) && \
     rm -rd /var/lib/apt/lists/*
 
