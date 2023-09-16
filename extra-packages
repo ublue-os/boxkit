@@ -1,2 +1,7 @@
+bc
 bzip2
+dialog
+libegl1-mesa
+libgl1-mesa-glx
+libvte-2.91-common
 software-properties-common
