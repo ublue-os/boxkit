@@ -2,7 +2,6 @@ age
 alpine-repo-tools-fish-completion
 atuin
 atuin-fish-completion
-#btop
 bat
 bat-fish-completion
 bottom
@@ -13,6 +12,7 @@ clipboard
 cosign
 cosign-fish-completion
 dbus-x11
+delta
 direnv
 exa
 exa-fish-completion
@@ -22,7 +22,6 @@ fisher
 flatpak-fish-completion
 fzf
 github-cli
-#helix
 just
 just-fish-completion
 make
@@ -30,8 +29,6 @@ micro
 ncdu
 ncurses
 neofetch
-#neovim
-#npm
 onefetch
 onefetch-fish-completion
 plocate
@@ -39,10 +36,12 @@ podman-fish-completion
 python3
 ripgrep
 speedtest-cli
-#starship
-#vimdiff
 wl-clipboard
 wl-clipboard-fish-completion
+xh
+xh-fish-completion
 zellij
 zellij-fish-completion
+zoxide
+zoxide-fish-completion
 zstd
