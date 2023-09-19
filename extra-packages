@@ -14,8 +14,8 @@ cosign-fish-completion
 dbus-x11
 delta
 direnv
-exa
-exa-fish-completion
+eza
+eza-fish-completion
 ffmpeg
 fish
 fisher
