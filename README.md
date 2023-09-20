@@ -34,25 +34,42 @@ Use [Distrobox](https://distrobox.privatedns.org/) to run [OBS Studio Portable](
 distrobox create --image ghcr.io/ublue-os/obs-studio-portable:latest --name obs --pull
 ```
 
-If you have an NVIDIA GPU, install the required CUDA and NVENC support in the container.
-- The `--nvidia` option, added in Distrobox 1.5.0, does not work on NixOS; so I install the required libraries in the container.
+## NVIDIA support
+
+The appropriate NVIDIA libraries on the host should be automatically be linked inside the container 🪄
+However the capability for Distrobox to automatically connect NVIDIA libraries was recently added in Distrobox 1.5.0, and is also not supported on all distros; NixOS for example.
+
+Therefore, if your are running an older version of Distrobox or the NVIDIA drivers are not automatically linked inside the container you can install them as follows:
   - Change the version number (***535** in the example below*) to match the version of the NVIDIA drivers you have installed on the host.
 
+### NVIDIA complete driver stack
+
+Required if the display is rendered by an NVIDIA GPU.
+
 ```bash
-distrobox create --image ghcr.io/ublue-os/obs-studio-portable:latest --name obs --pull --additional-packages "nvidia-headless-no-dkms-535 libnvidia-encode-535"
+distrobox create --image ghcr.io/ublue-os/obs-studio-portable:latest --name obs --pull --additional-packages nvidia-driver-535
 ```
+
+### NVIDIA compute only
+
+Suitable for multi-GPU systems where the NVIDIA GPU is not rendering the display and only being used for compute.
+
+```bash
+distrobox create --image ghcr.io/ublue-os/obs-studio-portable:latest --name obs --pull --additional-packages libnvidia-encode-535 nvidia-headless-no-dkms-535
 
 3. Run the initial setup.
 
 ```bash
-distrobox-enter --name obs -- true
+distrobox enter --name obs -- true
 ```
 
 4. From now on, launch OBS Studio Portable using the `obs-portable` launcher.
 
 ```bash
-distrobox-enter --name obs -- /opt/obs-portable/obs-portable
+distrobox enter --name obs -- /opt/obs-portable/obs-portable
 ```
+
+If the OBS Studio Portable container cannot connect to the host X11 server, add [`xhost +si:localuser:$USER`](https://github.com/89luca89/distrobox/blob/main/docs/compatibility.md#compatibility-notes) to `~/.distroboxrc`.
 
 # More information
 
