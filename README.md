@@ -12,9 +12,9 @@ Made with 💝 for 🐧</p>
 
 # OBS Studio Portable for Linux
 
-OBS Studio Portable is built from [toolbx-images/images](https://github.com/toolbx-images/images) and [wimpysworld/obs-studio-portable](https://github.com/wimpysworld/obs-studio-portable) using Ubuntu. Additionally, OBS Studio Portable includes the following features:
+OBS Studio Portable is built from [toolbx-images/images](https://github.com/toolbx-images/images) and [wimpysworld/obs-studio-portable](https://github.com/wimpysworld/obs-studio-portable) using Ubuntu. Additionally, OBS Studio Portable for Linux includes the following features:
 
-- Includes nearly **50 of the best 3rd Party plugins for OBS Studio**!
+- Includes **50 of the best 3rd Party plugins for OBS Studio**!
 - Chromium Embedded Frameworks (CEF) to enable Browser Sources
 - NVENC (NVIDIA) and VA-API (AMD & Intel) accelerated video encoding
 - Shader and GStreamer effects filters
@@ -23,6 +23,8 @@ OBS Studio Portable is built from [toolbx-images/images](https://github.com/tool
 - VLC and GStreamer Media sources
 - AJA NTV2 SDK
 - [WebSockets](https://github.com/obsproject/obs-websocket) 5.x and 4.9.1-compat are both included
+- [NewTek NDI™ integration](https://github.com/obs-ndi/obs-ndi) and [Teleport](https://github.com/fzwoch/obs-teleport) support
+- [SRT & RIST Protocol](https://obsproject.com/wiki/Streaming-With-SRT-Or-RIST-Protocols) support
 - Markdown, Pango and API text sources
 
 Using this container image of OBS Studio Portable it is possible to run an isolated OBS Studio on *any Linux distro*.
@@ -30,11 +32,11 @@ Using this container image of OBS Studio Portable it is possible to run an isola
 - A complete OBS Studio for Fedora Silver Blue users.
 - A fast-moving and compatible OBS Studio software stack for NixOS users.
 - Run current and fully equipped OBS Studio on Debian stable.
-- Run OBS Studio built with current Ubuntu (libraries/toolkits) interim releases on current and old Ubuntu LTS.
+- Run OBS Studio built with current Ubuntu interim releases with new OBS features enabled (thanks to access to newer libraries) on current and old Ubuntu LTS.
 
 # Installation
 
-Use [Distrobox](https://distrobox.privatedns.org/) to run [OBS Studio Portable]() on any Linux 🐧 distro.
+Use [Distrobox](https://distrobox.it/) to run [OBS Studio Portable](https://github.com/wimpysworld/obs-studio-portable) on any Linux 🐧 distro.
 
 - The OBS Studio configuration is exposed in your home directory on the host via the `~/.config/obs-portable` directory.
 - Launching multiple instances of OBS Studio Portable containers is not recommended as the configuration location is shared.
@@ -87,9 +89,7 @@ If the OBS Studio Portable container cannot connect to the host X11 server, add 
 
 # More information
 
-This container image of OBS Studio Portable is maintained as a collaborative effort between [Universal Blue](https://github.com/ublue-os) and [Martin Wimpress](https://github.com/flexiondotorg), the maintainer of [OBS Studio Portable](https://github.com/wimpysworld/obs-studio-portable), where you can find more information of OBS Studio Portable:
-
-- <https://github.com/wimpysworld/obs-studio-portable>
+This container image of OBS Studio Portable is maintained as a collaborative effort between [Universal Blue](https://github.com/ublue-os) and [Martin Wimpress](https://github.com/flexiondotorg), the maintainer of [OBS Studio Portable for Ubuntu](https://github.com/wimpysworld/obs-studio-portable).
 
 ## OBS Studio Portable Plugins
 
@@ -101,6 +101,7 @@ Here are the 3rd party plugins that come bundled with OBS Studio Portable for Li
 ### Audio 🔉
 
 - **[Audio Pan](https://github.com/norihiro/obs-audio-pan-filter)** plugin; control stereo pan of audio sources.
+- **[Local Vocal](https://github.com/obs-ai/obs-localvocal)** plugin; local speech and text AI processing routines and  AI transcription.
 - **[Mute Filter](https://github.com/norihiro/obs-mute-filter)** plugin; to mute audio from a source.
 - **[PipeWire Audio Capture](https://github.com/dimtpap/obs-pipewire-audio-capture)** plugin; capture application audio from PipeWire.
 - **[Scale to Sound](https://github.com/Qufyy/obs-scale-to-sound)** plugin; adds a filter which makes a source scale based on the audio levels of any audio source you choose
