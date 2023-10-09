@@ -1,5 +1,17 @@
 # boxkit
 
+## Description
+
+boxkit is a set of GitHub actions and skeleton files to build toolbox and distrobox images. Basically, clone this repo, make the changes you want, and then build what you need. Some examples include:
+
+- [DaVinci Box](https://github.com/zelikos/davincibox) - Container for DaVinci Resolve installation and runtime dependencies on Linux
+- [obs-studio-portable](https://github.com/ublue-os/obs-studio-portable) - OCI container image of OBS Studio that bundles a curated collection of 3rd party plugins
+- [bazzite-arch](https://github.com/ublue-os/bazzite-arch) - A ready-to-game Arch Linux based OCI designed for use exclusively in distrobox
+
+## Boxkit Alpine Example
+
+You can use whatever distribution you want with boxkit, this is the initial example ([here are more](https://github.com/ublue-os/bluefin/tree/main/toolboxes)):
+
 A base image and action for Toolbx and Distrobox.
 Sure, you can use the distro you're used to, but what if ... 
 
