@@ -1,6 +1,5 @@
 age
 atuin
-btop
 bat
 chezmoi
 clipboard
@@ -11,10 +10,8 @@ eza
 ffmpeg
 fzf
 github-cli
-helix
 just
 make
-micro
 ncdu
 ncurses
 neofetch
@@ -23,9 +20,7 @@ npm
 plocate
 python3
 ripgrep
-speedtest-cli
 starship
 vimdiff
 wl-clipboard
-zellij
 zstd
