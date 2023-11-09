@@ -1,14 +1,13 @@
-FROM quay.io/toolbx-images/alpine-toolbox:edge
+FROM quay.io/toolbx-images/fedora-toolbox:39
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
       summary="A cloud-native terminal experience" \
-      maintainer="jorge.castro@gmail.com"
+      maintainer="nerdy0901"
 
 COPY extra-packages /
-RUN apk update && \
-    apk upgrade && \
-    grep -v '^#' /extra-packages | xargs apk add
+RUN dnf upgrade --assumeyes && \
+    grep -v '^#' /extra-packages | xargs dnf install --assumeyes
 RUN rm /extra-packages
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
