@@ -3,15 +3,15 @@ on:
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * TUE'
+  # schedule:
+  #   - cron: '0 0 * * TUE'
   push:
     branches:
       - main
     paths-ignore:
       - '**/README.md'
 env:
-    IMAGE_NAME: boxkit
+    IMAGE_NAME: portable-dev
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
@@ -38,7 +38,7 @@ jobs:
           images: |
             ${{ env.IMAGE_NAME }}
           labels: |
-            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/ublue-os/boxkit/main/README.md
+            io.artifacthub.package.readme-url=https://raw.githubusercontent.com/jasonvasquez/portable-dev/main/README.md
 
       # Build image using Buildah action
       - name: Build Image
