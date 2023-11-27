@@ -10,6 +10,8 @@ on:
       - main
     paths-ignore:
       - '**/README.md'
+  workflow_dispatch:
+  
 env:
     IMAGE_NAME: portable-dev
     IMAGE_TAGS: latest
