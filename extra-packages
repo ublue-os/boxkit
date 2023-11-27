@@ -30,7 +30,6 @@ wl-clipboard
 zellij
 zstd
 lazygit
-python2 
 g++
 linux-headers
 grep
