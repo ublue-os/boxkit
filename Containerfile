@@ -23,8 +23,8 @@ USER root
 RUN chown -R $CONTAINER_USER: /home/linuxbrew/.linuxbrew
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
 #Install Rider
-RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
-    tar -xf /opt/rider.tar.gz -C /opt/
+#RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
+#    tar -xf /opt/rider.tar.gz -C /opt/
 
 RUN rm /extra-packages && rm /brew-packages
 RUN   ln -fs /bin/sh /usr/bin/sh && \
