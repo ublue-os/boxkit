@@ -23,15 +23,15 @@ USER root
 RUN chown -R $CONTAINER_USER: /home/linuxbrew/.linuxbrew
 ENV PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 #Install Rider
-RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
-    tar -xf /opt/rider.tar.gz -C /opt/
+#RUN wget https://download.jetbrains.com/rider/JetBrains.Rider-2023.3.3.tar.gz -O /opt/rider.tar.gz && \
+#    tar -xf /opt/rider.tar.gz -C /opt/
 
 RUN rm /extra-packages && rm /brew-packages
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
+#RUN   ln -fs /bin/sh /usr/bin/sh && \
+#      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
+#      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
+#      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
+#      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
+#      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
 CMD   /bin/bash
      
