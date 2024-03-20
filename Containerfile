@@ -33,5 +33,4 @@ RUN rm /extra-packages && rm /brew-packages
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
-CMD   /bin/bash
      
