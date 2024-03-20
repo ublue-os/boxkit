@@ -27,6 +27,7 @@ ENV PATH="$PATH:/home/linuxbrew/.linuxbrew/bin"
 #    tar -xf /opt/rider.tar.gz -C /opt/
 
 RUN rm /extra-packages && rm /brew-packages
+CMD /bin/bash
 #RUN   ln -fs /bin/sh /usr/bin/sh && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
 #      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
