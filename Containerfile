@@ -7,6 +7,7 @@ LABEL com.github.containers.toolbox="true" \
 
 COPY extra-packages /
 COPY brew-packages /
+COPY homebrewPath.sh /etc/profile.d/
 #Update core packages
 RUN apt-get update && \
     apt-get -y upgrade && \
