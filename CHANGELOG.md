@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/ublue-os/boxkit/compare/v1.1.0...v1.1.1) (2024-05-03)
+
+
+### Bug Fixes
+
+* Update example toolboxes link in README.md ([#71](https://github.com/ublue-os/boxkit/issues/71)) ([11e0e81](https://github.com/ublue-os/boxkit/commit/11e0e81e3357638fa675dc6bbf06ab5443076c24))
+
 ## [1.1.0](https://github.com/ublue-os/boxkit/compare/v1.0.0...v1.1.0) (2023-10-09)
 
 
