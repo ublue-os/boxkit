@@ -10,7 +10,7 @@ boxkit is a set of GitHub actions and skeleton files to build toolbox and distro
 
 ## Boxkit Alpine Example
 
-You can use whatever distribution you want with boxkit, this is the initial example ([here are more](https://github.com/ublue-os/bluefin/tree/main/toolboxes)):
+You can use whatever distribution you want with boxkit, this is the initial example ([here are more](https://github.com/ublue-os/toolboxes/tree/main/toolboxes)):
 
 A base image and action for Toolbx and Distrobox.
 Sure, you can use the distro you're used to, but what if ... 
