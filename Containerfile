@@ -28,11 +28,11 @@ RUN wget https://github.com/jqlang/jq/releases/download/jq-1.6/jq-linux64 -O /us
     rm /usr/bin/jq
 
 # Create desktop file from upstream
-RUN wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/com.obsproject.Studio.desktop -O /usr/share/applications/com.obsproject.Studio.desktop && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-128.png -O /usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
-    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/xdg-data/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
+RUN wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/cmake/linux/com.obsproject.Studio.desktop -O /usr/share/applications/com.obsproject.Studio.desktop && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/cmake/linux/icons/obs-logo-128.png -O /usr/share/icons/hicolor/128x128/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/cmake/linux/icons/obs-logo-256.png -O /usr/share/icons/hicolor/256x256/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/cmake/linux/icons/obs-logo-512.png -O /usr/share/icons/hicolor/512x512/apps/com.obsproject.Studio.png && \
+    wget https://raw.githubusercontent.com/obsproject/obs-studio/master/UI/cmake/linux/icons/obs-logo-scalable.svg -O /usr/share/icons/hicolor/scalable/apps/com.obsproject.Studio.svg && \
     sed -i 's@Exec=obs@Exec=/opt/obs-portable/obs-portable@g' /usr/share/applications/com.obsproject.Studio.desktop
 
 COPY obs-config-fix.sh /etc/profile.d/99-obs-config-fix.sh
