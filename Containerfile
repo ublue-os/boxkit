@@ -19,6 +19,9 @@ RUN rm /etc/apt/apt.conf.d/docker-gzip-indexes /etc/apt/apt.conf.d/docker-no-lan
     libnss-myhostname \
     flatpak-xdg-utils \
     $(cat toolbox-packages | xargs) && \
+    curl https://infinitekind.com/stabledl/current/moneydance_linux_amd64.deb -sLo /tmp/md.deb && \
+    dpkg --install /tmp/md.deb && \
+    rm -f /tmp/md.deb && \
     rm -rd /var/lib/apt/lists/* && \
     rm /toolbox-packages && \
     mkdir /usr/share/empty && \
