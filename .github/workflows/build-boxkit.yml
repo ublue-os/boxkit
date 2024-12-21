@@ -82,7 +82,13 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-            
+        
+      # Install and check cosign   
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.7.0
+      - name: Check cosign install
+        run: cosign version
+
       # Sign container
       - uses: sigstore/cosign-installer@v3.7.0
 
