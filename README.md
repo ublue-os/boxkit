@@ -5,6 +5,7 @@
 boxkit is a set of GitHub actions and skeleton files to build custom toolbox and distrobox images. Basically, clone this repo, make any changes you need, and then generate your custom images.
 
 Note that boxkit can be used independently of Fedora or uBlue OS.
+boxkit requires you atleast understand the basics of [ContainerFiles](https://www.mankier.com/5/Containerfile) and [shell scripting.](https://www.shellscript.sh/)
 
 ## Base images
 
@@ -55,7 +56,7 @@ jobs:
 - The URL for the generated images will be `ghcr.io/<username>/<image_name>` by default.
 
 ### Signing your images
-Although optional, it is **Higly recommended** you use container signing for your images.
+Although optional, it is **Highly recommended** you use container signing for your images.
 To sign your images, follow the steps below:
 
 1. [Install `cosign`.](https://docs.sigstore.dev/cosign/system_config/installation/)
