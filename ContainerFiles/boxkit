@@ -5,16 +5,11 @@ LABEL com.github.containers.toolbox="true" \
       summary="A cloud-native terminal experience" \
       maintainer="jorge.castro@gmail.com"
 
-COPY ../packages/boxkit-packages /
-RUN apk update && \
-    apk upgrade && \
-    grep -v '^#' /boxkit-packages | xargs apk add
-RUN rm /boxkit-packages
+# Copy the setup scripts and package list
+COPY ../scripts/boxkit.sh /
+COPY ../scripts/distrobox-shims.sh /
+COPY ../packages/boxkit.packages /
 
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
-     
+# Run the setup scripts
+RUN chmod +x boxkit.sh distrobox-shims.sh && /boxkit.sh
+RUN rm /boxkit.sh /distrobox-shims.sh /boxkit.packages

@@ -28,7 +28,7 @@ jobs:
       matrix:
         containerfile: 
           - boxkit
-          #- fedora-example # <<- Included as an example to demonstrate multi-image builds, uncomment to build
+       #- fedora-example # Included as an example to demonstrate multi-image builds, uncomment to build the fedora-example container too
     steps:
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
