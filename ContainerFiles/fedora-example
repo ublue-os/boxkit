@@ -5,14 +5,11 @@ LABEL com.github.containers.toolbox="true" \
       summary="An example ContainerFile to demonstrate multiple image builds." \
       maintainer="faeizmahrus@outlook.com"
 
-COPY ../packages/fedora-sample-packages /
-RUN dnf update -y && \
-    grep -v '^#' /fedora-sample-packages | xargs dnf install -y
-RUN rm /fedora-sample-packages
+# Copy the setup scripts and package list
+COPY ../scripts/fedora-sample.sh /
+COPY ../scripts/distrobox-shims.sh /
+COPY ../packages/fedora-example.packages /
 
-RUN   ln -fs /bin/sh /usr/bin/sh && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/flatpak && \ 
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/podman && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree && \
-      ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/transactional-update
+# Run the setup scripts
+RUN chmod +x fedora-example.sh distrobox-shims.sh && /fedora-example.sh
+RUN rm /fedora-example.sh /distrobox-shims.sh /fedora-example.packages
