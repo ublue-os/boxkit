@@ -5,10 +5,10 @@ LABEL com.github.containers.toolbox="true" \
       summary="An example ContainerFile to demonstrate multiple image builds." \
       maintainer="faeizmahrus@outlook.com"
 
-COPY ../packages/fedora-sample-packages /
+COPY ../packages/fedora-example-packages /
 RUN dnf update -y && \
-    grep -v '^#' /fedora-sample-packages | xargs dnf install -y
-RUN rm /fedora-sample-packages
+    grep -v '^#' /fedora-example-packages | xargs dnf install -y
+RUN rm /fedora-example-packages
 
 RUN   ln -fs /bin/sh /usr/bin/sh && \
       ln -fs /usr/bin/distrobox-host-exec /usr/local/bin/docker && \
