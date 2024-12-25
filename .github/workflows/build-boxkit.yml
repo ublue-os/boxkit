@@ -27,8 +27,7 @@ jobs:
       matrix:
         containerfile: 
           - boxkit
-          - fedora-sample
-    steps: 
+          #- fedora-example # Included as an example to demonstrate multi-image builds, uncomment to build the fedora-example container too
       # Checkout push-to-registry action GitHub repository
       - name: Checkout Push to Registry action
         uses: actions/checkout@v4
@@ -49,7 +48,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./Containerfiles/${{ matrix.containerfile }}
+            ./ContainerFiles/${{ matrix.containerfile }}
           image: ${{ matrix.containerfile }}
           tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}

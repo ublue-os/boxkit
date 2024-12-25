@@ -2,7 +2,7 @@ FROM quay.io/fedora/fedora-toolbox:latest
 
 LABEL com.github.containers.toolbox="true" \
       usage="This image is meant to be used with the toolbox or distrobox command" \
-      summary="Sample fedora-toolbox image" \
+      summary="An example ContainerFile to demonstrate multiple image builds." \
       maintainer="faeizmahrus@outlook.com"
 
 COPY ../packages/fedora-sample-packages /
