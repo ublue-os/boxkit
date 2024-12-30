@@ -4,10 +4,11 @@ on:
   pull_request:
     branches:
       - main
-  merge_group:
   push:
-    branches-ignore:
-      - gh-readonly-queue/*
+    branches:
+      - main
+    paths-ignore: # don't rebuild on documentation change
+      - '**.md'
   schedule:
     - cron: '0 0 * * TUE'
 
@@ -30,8 +31,8 @@ jobs:
           - boxkit
        #- fedora-example # Included as an example to demonstrate multi-image builds, uncomment to build the fedora-example container too
     steps:
-      # Checkout push-to-registry action GitHub repository
-      - name: Checkout Push to Registry action
+      # Clone code to runner
+      - name: Checkout
         uses: actions/checkout@v4
 
       # Build metadata
