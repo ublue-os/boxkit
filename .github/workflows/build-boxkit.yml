@@ -4,7 +4,10 @@ on:
   pull_request:
     branches:
       - main
-  merge_group:    
+  merge_group:
+  push:
+    branches-ignore:
+      - gh-readonly-queue/*
   schedule:
     - cron: '0 0 * * TUE'
 
