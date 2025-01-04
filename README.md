@@ -118,11 +118,4 @@ These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/quic
     
 If you're forking this repo you should [read the docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets) on keeping secrets in github. You need to [generate a new keypair](https://docs.sigstore.dev/cosign/key_management/signing_with_self-managed_keys/) with cosign. The public key can be in your public repo (your users need it to check the signatures), and you can paste the private key in Settings -> Secrets -> Actions.
 
-
-## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Recent activity [![Time period](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_badge.svg)](https://repography.com)
-[![Timeline graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_timeline.svg)](https://github.com/ublue-os/boxkit/commits)
-[![Issue status graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_issues.svg)](https://github.com/ublue-os/boxkit/issues)
-[![Pull request status graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_prs.svg)](https://github.com/ublue-os/boxkit/pulls)
-[![Trending topics](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_words.svg)](https://github.com/ublue-os/boxkit/commits)
-[![Top contributors](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_users.svg)](https://github.com/ublue-os/boxkit/graphs/contributors)
-[![Activity map](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_map.svg)](https://github.com/ublue-os/boxkit/commits)
+![Alt](https://repobeats.axiom.co/api/embed/7c5f037d792c6deb1946e5bc040f64a0fc8abeab.svg "Repobeats analytics image")
