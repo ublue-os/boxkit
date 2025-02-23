@@ -6,7 +6,7 @@ LABEL com.github.containers.toolbox="true" \
       maintainer="faeizmahrus@outlook.com"
 
 # Copy the setup scripts and package list
-COPY ../scripts/fedora-sample.sh /
+COPY ../scripts/fedora-example.sh /
 COPY ../scripts/distrobox-shims.sh /
 COPY ../packages/fedora-example.packages /
 
