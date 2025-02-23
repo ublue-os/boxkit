@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/ublue-os/boxkit/compare/v1.2.0...v1.2.1) (2025-02-23)
+
+
+### Bug Fixes
+
+* correct fedora-example build ([f9fe541](https://github.com/ublue-os/boxkit/commit/f9fe541f82bdfda5509f7b8c1d5a782e283c3b50))
+
 ## [1.2.0](https://github.com/ublue-os/boxkit/compare/v1.1.0...v1.2.0) (2025-01-04)
 
 
