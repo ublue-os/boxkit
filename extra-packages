@@ -11,7 +11,8 @@
 #github-cli
 #helix
 #just
-#make
+make
+cargo
 #ncdu
 #ncurses
 #neofetch
@@ -24,11 +25,12 @@
 #vimdiff
 #wl-clipboard
 #zstd
+git
 #For Homebrew
-build-essential
+gcc
 curl 
 #Required by Rider
-libxtst6 
-libglib2.0-bin
-git
+#libxtst6 
+#libglib2.0-bin
+
 
