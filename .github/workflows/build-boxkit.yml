@@ -7,17 +7,8 @@ on:
   push:
     branches:
       - main
-<<<<<<< HEAD
     paths-ignore:
       - '**/README.md'
-  workflow_dispatch:
-=======
-    paths-ignore: # don't rebuild on documentation change
-      - '**.md'
-  schedule:
-    - cron: '0 0 * * TUE'
-
->>>>>>> 5df52797c8d62b1d37c1b12d0637b0fc221731f2
 env:
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
