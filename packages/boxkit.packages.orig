@@ -1,0 +1,53 @@
+#age
+#atuin
+#bat
+#clipboard
+#cosign
+#dbus-x11
+#direnv
+#eza
+#ffmpeg
+#fzf
+#github-cli
+#helix
+#just
+make
+<<<<<<< HEAD:extra-packages
+cargo
+#ncdu
+#ncurses
+#neofetch
+#neovim
+#npm
+#plocate
+#python3
+#ripgrep
+#speedtest-cli
+#vimdiff
+#wl-clipboard
+#zstd
+git
+#For Homebrew
+gcc
+curl 
+#Required by Rider
+#libxtst6 
+#libglib2.0-bin
+
+
+=======
+micro
+ncdu
+ncurses
+neovim
+npm
+plocate
+python3
+ripgrep
+speedtest-cli
+starship
+vimdiff
+wl-clipboard
+zellij
+zstd
+>>>>>>> 5df52797c8d62b1d37c1b12d0637b0fc221731f2:packages/boxkit.packages
