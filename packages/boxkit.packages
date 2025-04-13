@@ -24,13 +24,12 @@ micro
 zellij
 starship
 btop
-nvim
 make
 cargo
 git
 curl 
 ncurses
-neofetch
+neofetch@testing
 neovim
 vimdiff
 cosign
