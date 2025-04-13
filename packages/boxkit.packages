@@ -1,7 +1,7 @@
 #age
 #atuin
 #bat
-#clipboard
+clipboard
 #dbus-x11
 #direnv
 #eza
@@ -33,5 +33,8 @@ neofetch@testing
 neovim
 vimdiff
 cosign
+#Media Playback
+mpv
+timg
 #Needed for bitwarden-cli through node
 npm
