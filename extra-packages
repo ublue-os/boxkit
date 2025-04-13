@@ -1,0 +1,45 @@
+#age
+#atuin
+#bat
+#clipboard
+#cosign
+#dbus-x11
+#direnv
+#eza
+#ffmpeg
+#fzf
+#github-cli
+#helix
+#just
+make
+cargo
+#ncdu
+#ncurses
+#neofetch
+#neovim
+#npm
+#plocate
+#python3
+#ripgrep
+#speedtest-cli
+#vimdiff
+#wl-clipboard
+#zstd
+git
+#For Homebrew
+gcc
+curl 
+#Required by Rider
+#libxtst6 
+#libglib2.0-bin
+#Former homebrew packages
+gcc
+chezmoi
+micro
+zellij
+starship
+btop
+bitwarden-cli
+nvim
+
+
