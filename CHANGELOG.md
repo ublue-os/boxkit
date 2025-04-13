@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.2.0](https://github.com/ublue-os/boxkit/compare/v1.1.0...v1.2.0) (2025-01-04)
+
+
+### Features
+
+* New readme ([#89](https://github.com/ublue-os/boxkit/issues/89)) ([4ccb045](https://github.com/ublue-os/boxkit/commit/4ccb045c84e3de6ed2d3ca3fd97f08c4818f942e))
+* Refactor to use scripts ([#88](https://github.com/ublue-os/boxkit/issues/88)) ([b115bfd](https://github.com/ublue-os/boxkit/commit/b115bfd1d21886124b60493009bb8a1e8da62413))
+
+
+### Bug Fixes
+
+* add back the push trigger ([#93](https://github.com/ublue-os/boxkit/issues/93)) ([d8e441d](https://github.com/ublue-os/boxkit/commit/d8e441d157517bf80eb8f5c72bdf8a025c440bc5))
+* Cleanup fedora-example and packages/ ([040ab26](https://github.com/ublue-os/boxkit/commit/040ab262f71a586088a227583b22ca1c259ab907))
+* remove neofetch ([#84](https://github.com/ublue-os/boxkit/issues/84)) ([ece0ab6](https://github.com/ublue-os/boxkit/commit/ece0ab62a72200683246a9b184d87f7def6872a5))
+* update cosign.pub ([#74](https://github.com/ublue-os/boxkit/issues/74)) ([5cb87a3](https://github.com/ublue-os/boxkit/commit/5cb87a3843be43ba5999c44006df83a09386ac59))
+* Update example toolboxes link in README.md ([#71](https://github.com/ublue-os/boxkit/issues/71)) ([11e0e81](https://github.com/ublue-os/boxkit/commit/11e0e81e3357638fa675dc6bbf06ab5443076c24))
+
 ## [1.1.0](https://github.com/ublue-os/boxkit/compare/v1.0.0...v1.1.0) (2023-10-09)
 
 

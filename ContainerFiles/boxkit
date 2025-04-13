@@ -1,0 +1,15 @@
+FROM quay.io/toolbx-images/alpine-toolbox:edge
+
+LABEL com.github.containers.toolbox="true" \
+      usage="This image is meant to be used with the toolbox or distrobox command" \
+      summary="A cloud-native terminal experience" \
+      maintainer="jorge.castro@gmail.com"
+
+# Copy the setup scripts and package list
+COPY ../scripts/boxkit.sh /
+COPY ../scripts/distrobox-shims.sh /
+COPY ../packages/boxkit.packages /
+
+# Run the setup scripts
+RUN chmod +x boxkit.sh distrobox-shims.sh && /boxkit.sh
+RUN rm /boxkit.sh /distrobox-shims.sh /boxkit.packages

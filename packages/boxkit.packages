@@ -12,6 +12,7 @@
 #helix
 #just
 make
+<<<<<<< HEAD:extra-packages
 cargo
 #ncdu
 #ncurses
@@ -34,3 +35,19 @@ curl
 #libglib2.0-bin
 
 
+=======
+micro
+ncdu
+ncurses
+neovim
+npm
+plocate
+python3
+ripgrep
+speedtest-cli
+starship
+vimdiff
+wl-clipboard
+zellij
+zstd
+>>>>>>> 5df52797c8d62b1d37c1b12d0637b0fc221731f2:packages/boxkit.packages

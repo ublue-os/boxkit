@@ -1,119 +1,121 @@
 # boxkit
 
-## Description
+## What is boxkit ?
 
-boxkit is a set of GitHub actions and skeleton files to build toolbox and distrobox images. Basically, clone this repo, make the changes you want, and then build what you need. Some examples include:
+boxkit is a set of GitHub actions and skeleton files to build custom toolbox and distrobox images. Basically, clone this repo, make any changes you need, and then generate your custom images.
 
-- [DaVinci Box](https://github.com/zelikos/davincibox) - Container for DaVinci Resolve installation and runtime dependencies on Linux
-- [obs-studio-portable](https://github.com/ublue-os/obs-studio-portable) - OCI container image of OBS Studio that bundles a curated collection of 3rd party plugins
-- [bazzite-arch](https://github.com/ublue-os/bazzite-arch) - A ready-to-game Arch Linux based OCI designed for use exclusively in distrobox
+Note that boxkit can be used independently of Fedora or uBlue OS.
+boxkit requires you atleast understand the basics of [ContainerFiles](https://www.mankier.com/5/Containerfile) and [shell scripting.](https://www.shellscript.sh/)
 
-## Boxkit Alpine Example
+## Base images
 
-You can use whatever distribution you want with boxkit, this is the initial example ([here are more](https://github.com/ublue-os/bluefin/tree/main/toolboxes)):
+You can use the Docker/OCI container image of practically any distribution as your base image to build your custom image off of. Note that the base images can also be used directly with distrobox/toolbox without any modifications.
 
-A base image and action for Toolbx and Distrobox.
-Sure, you can use the distro you're used to, but what if ... 
+Here is a list of some base images you can use:
 
-This image is going to experiment with what a "born from cloud native" UNIX terminal experience would look like. 
-It is used in conjuction with a [dotfile manager](https://dotfiles.github.io/utilities/) and designed to be the companion terminal experience for cloud-native desktops. 
-We're starting small but have big aspirations.
+- [toolbx Community images](https://github.com/toolbx-images/images)
+- [uBlue toolboxes](https://github.com/ublue-os/toolboxes)
 
-- Starts with the latest Alpine image from the [Toolbx Community Images](https://github.com/toolbx-images/images)
-- Adds some quality of life
-  - `starship` prompt for that <3
-  - `just` for task execution
-  - `chezmoi` for dotfile management
-  - `btop` for process management
-  - `micro` and `helix` text editors
-  - [clipboard](https://github.com/Slackadays/Clipboard) to cut, copy, and paste anything, anywhere, all from the terminal! 
-  - `python3` 
-  - Some common power tools: `plocate`, `fzf`, `cosign`, `ripgrep`, `github-cli`, and `ffmpeg`
-  - CLI tools recommended by [rawkode](https://www.youtube.com/watch?v=TNlDSG1iDW8)
-    - [zellij](https://github.com/zellij-org/zellij) - terminal workspace
-    - [direnv](https://direnv.net/) - environment variable extension for your shell 
-    - [atuin](https://github.com/ellie/atuin) - magical shell history
-- Host Management QoL
-  - These are meant for occasional one off commands, not complex workflows
-    - Auto symlink the flatpak, podman, and docker commands
-    - Auto symlink rpm-ostree for Fedora
-    - Auto symlink transactional-update for openSUSE MicroOS
+Try to derive your custom images from these base images so we can all help maintain them over time, you can't have bling without good stock!
 
-## How to use
+Tag your image with `boxkit` to share with others!
 
-### Create Box
+## How to use boxkit
+
+### How everything is organized
+
+- The ContainerFiles for the custom images are stored in the `ContainerFiles/` folder.
+- The setup scripts for the custom images (if needed) are stored in the `scripts/` folder.
+- The package lists for the setup scripts (if needed) are stored in the `packages/` folder.
+- The Github workflow that generates the images is `.github/workflows/build-boxkit.yml`
+
+### How to make your own images
+
+1. Fork this repo.
+2. Add the ContainerFiles for your custom images to the `ContainerFiles/` folder.
+3. Add the setup scripts you want to use for your custom images (if needed) to the `scripts/` folder.
+4. Add the package list you want to use for your custom images (if needed) to the `packages/` folder.
+5. Add the name of the ContainerFiles of your custom images to the following section in `build-boxkit.yml`:
+
+```yaml
+jobs:
+  strategy:
+    matrix:
+      containerfile:
+      - [your_custom_image_1]
+      - [your_custom_image_2]
+```
+
+**Note:** 
+- You can choose to only generate a single custom image if you want. 
+- You can remove the boxkit and fedora-example images provided in the boxkit repo and only generate your own custom images.
+- The `scripts/` and `packages/` folders are optional, you can generate your custom images without them, but they are highly recommended to use.
+- The name of your custom image and ContainerFile **MUST** be the same. <br>
+
+  e.g. If you want to create a custom image named *appbox-debian*, the corresponding ContainerFile must be named `appbox-debian` and must be stored inside the `ContainerFiles/` folder.
+- The URL for the generated images will be `ghcr.io/<username>/<image_name>` by default.
+
+### Signing your images
+Although optional, it is **Highly recommended** you use container signing for your images.
+To sign your images, follow the steps below:
+
+1. [Install `cosign`.](https://docs.sigstore.dev/cosign/system_config/installation/)
+2. Generate cosign keypairs. <br>
+   When it asks you to enter a password, **DONOT ENTER A PASSWORD,** Just press enter.
+
+   ```bash
+   cosign generate-key-pair
+   ```
+
+   This will create two files named `cosign.pub` and `cosign.key`, which are your public and private keys, respectively.
+3. Go to the repository settings of your forked boxkit github repo. (**NOT your GitHub/Account settings**)
+   - Go to *Security* > *Secrets and variables* > *Actions*
+   - Click on *New repository secret*
+   - Create a new secret named `SIGNING_SECRET`
+   - Copy the content inside your `cosign.key` file to the textbox that appears when you create the `SIGNING_SECRET` repository secret.
+   - Alternatively, you can use GitHub's CLI client.
+     ```bash
+     gh secret set SIGNING_SECRET < cosign.key
+     ```
+
+   **DONOT SHARE YOUR `cosign.key` FILE OR `SIGNING_SECRET` PUBLICLY, STORE THE `cosign.key` FILE SOMEWHERE SECURE AND DONOT INCLUDE IT IN YOUR GIT REPOSITORY.**
+
+4. Delete the `cosign.pub` key that exists on the repository's root folder and copy the `cosign.pub` file you created to the repository's root folder.
+
+Congratulations, you have successfully enabled container signing for all your custom images.
+
+## Using the custom images
+
+We use the default boxkit image as an example to show you how to create a distrobox/toolbox container using a custom image.
 
 If you use distrobox:
 
     distrobox create -i ghcr.io/ublue-os/boxkit -n boxkit
     distrobox enter boxkit
     
-If you use toolbx:
+If you use toolbox:
 
     toolbox create -i ghcr.io/ublue-os/boxkit -c boxkit
     toolbox enter boxkit
 
-### Pull down your config
+**NOTE:**
+- You can use `chezmoi` to pull down your dotfiles and set up git sync.
+- It is recommended to use the [Ptyxis](https://flathub.org/apps/app.devsuite.Ptyxis) terminal, which provides seamless integration with various podman/distrobox/toolbx containers. 
 
-Use `chezmoi` to pull down your dotfiles and set up git sync.
+## Custom images built with boxkit
 
+Here is a list of some awesome custom images built using boxkit.
 
-### Make your own
-
-Fork and add programs to this this image - over time you'll end up with the perfect CLI for you.
-Keeping it as a pet works, though the author recommends leaving all your config in git and routinely pulling a new image.
-
-The user experience is much nicer if you [set your terminal open right in the container](https://distrobox.privatedns.org/useful_tips/#using-distrobox-as-main-cli) and is the intended experience. 
-
-## Why?
-
-While LTS images pay the bills they move at that pace for a reason, I wanted:
-
-- Something that kept up the pace with cloud native tech
-- Expansive repos so all stack needs are covered
-  - But also has all the cool new tools the rustaceans keep cranking out
-- apk is _fast_
-
-And of course, as the user space for a cloud-native desktop the biggest reason is it's everywhere in the stack, why not be the "default terminal"?
-
-Also, I've never gotten really to know Alpine, the problem with running distros like this bare metal on my PC is that there's a whole bunch of hardware quirks and all sorts of little enablement things that more generalized distros tend to get right. 
-
-But in a Toolbx/Distrobox world the kernel and anything that talks to hardware is handled by the host operating system.
-This let's us concentrate on just the CLI experience, get yourself some of that UNIX bling.
-Also apk is fast. Watch the video for more!
-
-[![Video Recording](https://img.youtube.com/vi/7-FPAWjROos/0.jpg)](https://youtu.be/7-FPAWjROos)
+- [DaVinci Box](https://github.com/zelikos/davincibox) - Container for DaVinci Resolve installation and runtime dependencies on Linux.
+- [obs-studio-portable](https://github.com/ublue-os/obs-studio-portable) - OCI container image of OBS Studio that bundles a curated collection of 3rd party plugins.
+- [bazzite-arch](https://github.com/ublue-os/bazzite-arch) - A ready-to-game Arch Linux based OCI designed for use exclusively in distrobox.
 
 ## Verification
 
-These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/cosign/overview/). You can verify the signature by downloading the `cosign.pub` key from this repo and running the following command:
+These images are signed with sisgstore's [cosign](https://docs.sigstore.dev/quickstart/quickstart-cosign/). You can verify the signature by downloading the `cosign.pub` key from this repo and running the following command:
 
     cosign verify --key cosign.pub ghcr.io/ublue-os/boxkit
     
-If you're forking this repo you should [read the docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets) on keeping secrets in github. You need to [generate a new keypair](https://docs.sigstore.dev/cosign/overview/) with cosign. The public key can be in your public repo (your users need it to check the signatures), and you can paste the private key in Settings -> Secrets -> Actions.
+If you're forking this repo you should [read the docs](https://docs.github.com/en/actions/security-guides/encrypted-secrets) on keeping secrets in github. You need to [generate a new keypair](https://docs.sigstore.dev/cosign/key_management/signing_with_self-managed_keys/) with cosign. The public key can be in your public repo (your users need it to check the signatures), and you can paste the private key in Settings -> Secrets -> Actions.
 
-## Scope and Cynicism
-
-I know what you're thinking, we're just going to shove everything from [Modern UNIX](https://github.com/ibraheemdev/modern-unix) in there and it's going to look like a glitter explosion. 
-
-That's why I'm going to be strongly opinionated, so use this as a base to build your own perfect CLI experience. 
-Custom configs are NOT included, those belong in your dotfiles, use them in combination with an image. 
-
-This is a tame first effort, one of you out there is going to make something better than this, the perfect CLI workspace, I salute you. 
-
-## Finding Good Base Images
-
-Of course you can make this however you want, but start with the [Toolbx Community images](https://github.com/toolbx-images/images).
-These are a set of mostly-stock images with packages needed to run as a toolbox/distrobox already installed. 
-
-Try to derive your blingbox from those base images so we can all help maintain them over time, you can't have bling without good stock!
-
-Tag your image with `boxkit` to share with others!
-
-## [![Repography logo](https://images.repography.com/logo.svg)](https://repography.com) / Recent activity [![Time period](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_badge.svg)](https://repography.com)
-[![Timeline graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_timeline.svg)](https://github.com/ublue-os/boxkit/commits)
-[![Issue status graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_issues.svg)](https://github.com/ublue-os/boxkit/issues)
-[![Pull request status graph](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_prs.svg)](https://github.com/ublue-os/boxkit/pulls)
-[![Trending topics](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_words.svg)](https://github.com/ublue-os/boxkit/commits)
-[![Top contributors](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_users.svg)](https://github.com/ublue-os/boxkit/graphs/contributors)
-[![Activity map](https://images.repography.com/35181738/ublue-os/boxkit/recent-activity/9_nHJKzKdmCsGzSsdjbuHqS2t9mY6ijnFHQGQSEWtW0/lgGy5XEcVYQ14vma9bwaPOYJFIxlNmj5nK3-CFQQkgc_map.svg)](https://github.com/ublue-os/boxkit/commits)
+![Alt](https://repobeats.axiom.co/api/embed/7c5f037d792c6deb1946e5bc040f64a0fc8abeab.svg "Repobeats analytics image")

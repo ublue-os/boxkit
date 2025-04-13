@@ -1,43 +1,53 @@
 name: build-boxkit
 on:
+  workflow_dispatch: # allow manually triggering builds
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '0 0 * * TUE'
   push:
     branches:
       - main
+<<<<<<< HEAD
     paths-ignore:
       - '**/README.md'
   workflow_dispatch:
+=======
+    paths-ignore: # don't rebuild on documentation change
+      - '**.md'
+  schedule:
+    - cron: '0 0 * * TUE'
+
+>>>>>>> 5df52797c8d62b1d37c1b12d0637b0fc221731f2
 env:
-    IMAGE_NAME: boxkit
     IMAGE_TAGS: latest
     IMAGE_REGISTRY: ghcr.io/${{ github.repository_owner }}
 
 jobs:
   push-ghcr:
     name: Build and push image
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
       id-token: write
     strategy:
       fail-fast: false
-    steps: 
-      # Checkout push-to-registry action GitHub repository
-      - name: Checkout Push to Registry action
+      matrix:
+        containerfile: 
+          - boxkit
+       #- fedora-example # Included as an example to demonstrate multi-image builds, uncomment to build the fedora-example container too
+    steps:
+      # Clone code to runner
+      - name: Checkout
         uses: actions/checkout@v4
-        
+
       # Build metadata
       - name: Image Metadata
         uses: docker/metadata-action@v5
         id: meta
         with:
           images: |
-            ${{ env.IMAGE_NAME }}
+            ${{ matrix.containerfile }}
           labels: |
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/ublue-os/boxkit/main/README.md
 
@@ -47,11 +57,11 @@ jobs:
         uses: redhat-actions/buildah-build@v2
         with:
           containerfiles: |
-            ./Containerfile
-          image: ${{ env.IMAGE_NAME }}
+            ./ContainerFiles/${{ matrix.containerfile }}
+          image: ${{ matrix.containerfile }}
           tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}
-          oci: false
+          oci: true
           
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
@@ -64,6 +74,7 @@ jobs:
       # Push the image to GHCR (Image Registry)
       - name: Push To GHCR
         uses: redhat-actions/push-to-registry@v2
+        if: github.event_name != 'pull_request'
         id: push
         env:
           REGISTRY_USER: ${{ github.actor }}
@@ -74,8 +85,6 @@ jobs:
           registry: ${{ steps.registry_case.outputs.lowercase }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ env.REGISTRY_PASSWORD }}
-          extra-args: |
-            --disable-content-trust
             
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -85,12 +94,13 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
             
       # Sign container
-      - uses: sigstore/cosign-installer@v3.4.0
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.8.1
 
       - name: Sign container image
         if: github.event_name != 'pull_request'
         run: |
-          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ steps.registry_case.outputs.lowercase }}/${{ env.IMAGE_NAME }}@${TAGS}
+          cosign sign -y --key env://COSIGN_PRIVATE_KEY ${{ steps.registry_case.outputs.lowercase }}/${{ matrix.containerfile }}@${TAGS}
         env:
           TAGS: ${{ steps.push.outputs.digest }}
           COSIGN_EXPERIMENTAL: false
