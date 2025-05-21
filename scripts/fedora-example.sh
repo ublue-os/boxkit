@@ -5,4 +5,4 @@
 
 # Update the container and install packages
 dnf update -y
-grep -v '^#' ./fedora-example.packages | xargs dnf install -y 
+grep -v '^#' ./fedora-example.packages | xargs dnf install -y
