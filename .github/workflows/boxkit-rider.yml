@@ -1,4 +1,4 @@
-name: build-boxkit-dotnet
+name: build-boxkit-rider
 on:
   workflow_dispatch: # allow manually triggering builds
   pull_request:
