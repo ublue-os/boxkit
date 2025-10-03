@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.0](https://github.com/ublue-os/boxkit/compare/v1.2.0...v1.3.0) (2025-10-03)
+
+
+### Features
+
+* add basic EditorConfig file ([8a43b35](https://github.com/ublue-os/boxkit/commit/8a43b3568de65be0b4970a4a2d485cbf268567d9))
+
+
+### Bug Fixes
+
+* correct fedora-example build ([5df5279](https://github.com/ublue-os/boxkit/commit/5df52797c8d62b1d37c1b12d0637b0fc221731f2))
+* correct fedora-example build ([f9fe541](https://github.com/ublue-os/boxkit/commit/f9fe541f82bdfda5509f7b8c1d5a782e283c3b50))
+
 ## [1.2.0](https://github.com/ublue-os/boxkit/compare/v1.1.0...v1.2.0) (2025-01-04)
 
 
