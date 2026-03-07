@@ -24,18 +24,19 @@ Tag your image with `boxkit` to share with others!
 
 ### How everything is organized
 
-- The ContainerFiles for the custom images are stored in the `ContainerFiles/` folder.
+- The Containerfiles for the custom images are stored in the `Containerfiles/` folder.
 - The setup scripts for the custom images (if needed) are stored in the `scripts/` folder.
 - The package lists for the setup scripts (if needed) are stored in the `packages/` folder.
+- The Justfile provides local build commands (`just build-boxkit`, `just build-all`).
 - The Github workflow that generates the images is `.github/workflows/build-boxkit.yml`
 
 ### How to make your own images
 
 1. Fork this repo.
-2. Add the ContainerFiles for your custom images to the `ContainerFiles/` folder.
+2. Add the Containerfiles for your custom images to the `Containerfiles/` folder.
 3. Add the setup scripts you want to use for your custom images (if needed) to the `scripts/` folder.
 4. Add the package list you want to use for your custom images (if needed) to the `packages/` folder.
-5. Add the name of the ContainerFiles of your custom images to the following section in `build-boxkit.yml`:
+5. Add the name of the Containerfiles of your custom images to the following section in `build-boxkit.yml`:
 
 ```yaml
 jobs:
@@ -50,10 +51,33 @@ jobs:
 - You can choose to only generate a single custom image if you want. 
 - You can remove the boxkit and fedora-example images provided in the boxkit repo and only generate your own custom images.
 - The `scripts/` and `packages/` folders are optional, you can generate your custom images without them, but they are highly recommended to use.
-- The name of your custom image and ContainerFile **MUST** be the same. <br>
+- The name of your custom image and Containerfile **MUST** be the same. <br>
 
-  e.g. If you want to create a custom image named *appbox-debian*, the corresponding ContainerFile must be named `appbox-debian` and must be stored inside the `ContainerFiles/` folder.
+  e.g. If you want to create a custom image named *appbox-debian*, the corresponding Containerfile must be named `appbox-debian` and must be stored inside the `Containerfiles/` folder.
 - The URL for the generated images will be `ghcr.io/<username>/<image_name>` by default.
+
+## zstd:chunked and Content-Based Layers
+
+boxkit images use [chunkah](https://github.com/coreos/chunkah) for content-based layer splitting and `zstd:chunked` compression. This significantly reduces bandwidth when pulling updated images by only fetching changed content.
+
+**Benefits:**
+- **Faster image pulls** - Only changed layers are downloaded
+- **Reduced bandwidth usage** - Efficient delta transfers
+- **Better layer reuse** - Package-based layers maximize caching across updates
+
+**How it works:**
+- The `scripts/chunkah-tag.sh` script tags all installed files with their package names using extended file attributes
+- The `chunkah` tool uses these tags to create intelligent package-based layers (up to 64 layers max)
+- Images are compressed with `zstd:chunked` for efficient partial pulls
+- Works with any OCI-compliant registry and requires no special client support
+
+**Supported distributions:**
+- Alpine Linux (apk)
+- Fedora/RHEL/CentOS (rpm/dnf/yum)
+- Debian/Ubuntu (dpkg/apt)
+- Arch Linux (pacman)
+
+The script auto-detects your package manager and tags files accordingly. If using an unsupported distribution, chunkah will still work but layer splitting will be less optimal.
 
 ### Signing your images
 Although optional, it is **Highly recommended** you use container signing for your images.

@@ -1,0 +1,35 @@
+FROM quay.io/toolbx-images/alpine-toolbox:edge AS builder
+
+# Copy the setup scripts and package list
+COPY scripts/boxkit.sh /
+COPY scripts/distrobox-shims.sh /
+COPY scripts/chunkah-tag.sh /
+COPY packages/boxkit.packages /
+
+# Run the setup scripts and tag files for chunkah
+RUN chmod +x boxkit.sh distrobox-shims.sh chunkah-tag.sh && \
+    /boxkit.sh && \
+    /chunkah-tag.sh && \
+    rm /boxkit.sh /distrobox-shims.sh /chunkah-tag.sh /boxkit.packages
+
+# For CI builds with buildah, use chunkah rechunking
+# For local podman builds, use: podman build --target=builder -f Containerfiles/boxkit -t boxkit:local .
+
+# https://github.com/coreos/chunkah
+FROM quay.io/jlebon/chunkah AS chunkah
+
+# Rechunk with content-based layers
+ARG SOURCE_DATE_EPOCH
+ENV SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-0}
+RUN --mount=from=builder,src=/,target=/chunkah,ro \
+    --mount=type=bind,target=/run/src,rw \
+    chunkah build \
+    --max-layers 64 \
+    --label=com.github.containers.toolbox=true \
+    --label=usage="This image is meant to be used with the toolbox or distrobox command" \
+    --label=summary="A cloud-native terminal experience" \
+    --label=maintainer=jorge.castro@gmail.com \
+    > /run/src/out.ociarchive
+
+# Deploy final chunked image
+FROM oci-archive:out.ociarchive
