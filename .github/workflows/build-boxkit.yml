@@ -48,7 +48,13 @@ jobs:
       # Compute SOURCE_DATE_EPOCH for reproducible builds
       - name: Compute SOURCE_DATE_EPOCH
         id: epoch
-        run: echo "epoch=$(date -d '${{ github.event.head_commit.timestamp }}' +%s)" >> $GITHUB_OUTPUT
+        run: |
+          commit_ts=$(git show -s --format=%ct "$GITHUB_SHA" 2>/dev/null || echo '')
+          if [ -z "$commit_ts" ]; then
+            echo "Warning: could not determine commit timestamp, falling back to current time"
+            commit_ts=$(date +%s)
+          fi
+          echo "epoch=$commit_ts" >> "$GITHUB_OUTPUT"
 
       # Build image using Buildah action
       - name: Build Image
