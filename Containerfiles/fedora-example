@@ -1,0 +1,36 @@
+FROM quay.io/fedora/fedora-toolbox:latest AS builder
+
+# Copy the setup scripts and package list
+COPY scripts/fedora-example.sh /
+COPY scripts/distrobox-shims.sh /
+COPY scripts/chunkah-tag.sh /
+COPY packages/fedora-example.packages /
+
+# Run the setup scripts and tag files for chunkah
+RUN chmod +x fedora-example.sh distrobox-shims.sh chunkah-tag.sh && \
+    /fedora-example.sh && \
+    /chunkah-tag.sh && \
+    rm /fedora-example.sh /distrobox-shims.sh /chunkah-tag.sh /fedora-example.packages
+
+# For CI builds with buildah, use chunkah rechunking
+# For local podman builds, use: podman build --target=builder -f Containerfiles/fedora-example -t fedora-example:local .
+
+# https://github.com/coreos/chunkah
+FROM quay.io/jlebon/chunkah AS chunkah
+
+# Rechunk with content-based layers
+ARG SOURCE_DATE_EPOCH
+ENV SOURCE_DATE_EPOCH=${SOURCE_DATE_EPOCH:-0}
+RUN --mount=from=builder,src=/,target=/chunkah,ro \
+    --mount=type=bind,target=/run/src,rw \
+    chunkah build \
+    --max-layers 64 \
+    --label=com.github.containers.toolbox=true \
+    --label=name=fedora-toolbox \
+    --label=usage="This image is meant to be used with the toolbox or distrobox command" \
+    --label=summary="An example ContainerFile to demonstrate multiple image builds." \
+    --label=maintainer=faeizmahrus@outlook.com \
+    > /run/src/out.ociarchive
+
+# Deploy final chunked image
+FROM oci-archive:out.ociarchive

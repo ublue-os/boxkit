@@ -45,17 +45,32 @@ jobs:
           labels: |
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/ublue-os/boxkit/main/README.md
 
+      # Compute SOURCE_DATE_EPOCH for reproducible builds
+      - name: Compute SOURCE_DATE_EPOCH
+        id: epoch
+        run: |
+          commit_ts=$(git show -s --format=%ct "$GITHUB_SHA" 2>/dev/null || echo '')
+          if [ -z "$commit_ts" ]; then
+            echo "Warning: could not determine commit timestamp, falling back to current time"
+            commit_ts=$(date +%s)
+          fi
+          echo "epoch=$commit_ts" >> "$GITHUB_OUTPUT"
+
       # Build image using Buildah action
       - name: Build Image
         id: build_image
         uses: redhat-actions/buildah-build@7a95fa7ee0f02d552a32753e7414641a04307056 # v2
         with:
           containerfiles: |
-            ./ContainerFiles/${{ matrix.containerfile }}
+            ./Containerfiles/${{ matrix.containerfile }}
           image: ${{ matrix.containerfile }}
           tags: ${{ env.IMAGE_TAGS }}
           labels: ${{ steps.meta.outputs.labels }}
-          oci: true
+          oci: false
+          extra-args: |
+            --skip-unused-stages=false
+          build-args: |
+            SOURCE_DATE_EPOCH=${{ steps.epoch.outputs.epoch }}
           
       # Workaround bug where capital letters in your GitHub username make it impossible to push to GHCR.
       # https://github.com/macbre/push-to-ghcr/issues/12
@@ -79,6 +94,8 @@ jobs:
           registry: ${{ steps.registry_case.outputs.lowercase }}
           username: ${{ env.REGISTRY_USER }}
           password: ${{ env.REGISTRY_PASSWORD }}
+          extra-args: |
+            --compression-format=zstd:chunked
             
       - name: Login to GitHub Container Registry
         uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
